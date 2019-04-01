@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PeminjamanActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleGravity="bottom|start"
+            app:expandedTitleTextAppearance="@style/AppTheme.TitleText"
+            app:expandedTitleMarginBottom="80dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            android:fitsSystemWindows="true">
+
+            <ImageView
+                android:layout_marginTop="-30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="pin"
+                android:alpha="0.7"
+                android:src="@drawable/cardboards"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Atur segala keperluan peminjaman Anda di sini"
+                android:textSize="16sp"
+                android:textColor="#fff"
+                android:layout_margin="@dimen/subtitle_margin"
+                android:layout_marginBottom="@dimen/text_margin"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.3"
+                android:layout_gravity="bottom"
+                />
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/toolbar"
+                android:theme="@style/AppTheme.NoActionBar.AppBarOverlay"
+                app:layout_collapseMode="pin"
+                app:titleTextAppearance="@style/AppTheme.TitleText"
+                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay">
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginTop="@dimen/fab_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/heading1"
+                android:text="Daftar Pinjaman Anda"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
