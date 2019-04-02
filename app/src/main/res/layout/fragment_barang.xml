@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PeminjamanActivity">
+    tools:context=".BarangFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
@@ -28,21 +29,20 @@
                 android:layout_height="match_parent"
                 app:layout_collapseMode="pin"
                 android:alpha="0.7"
-                android:src="@drawable/cardboards"
+                android:src="@drawable/shelf"
                 android:scaleType="centerCrop"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Atur segala keperluan peminjaman Anda di sini"
+                android:text="@string/barang_tagline"
                 android:textSize="16sp"
                 android:textColor="#fff"
                 android:layout_margin="@dimen/subtitle_margin"
                 android:layout_marginBottom="@dimen/text_margin"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.3"
-                android:layout_gravity="bottom"
-                />
+                android:layout_gravity="bottom"/>
 
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
@@ -64,33 +64,25 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/fab_margin">
+            android:layout_marginTop="@dimen/text_margin"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/heading1"
-                android:text="Daftar Pinjaman Anda"
                 android:layout_marginStart="@dimen/text_margin"
-                android:layout_marginEnd="@dimen/text_margin"/>
-
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:id="@+id/peminjamanlist_loading"/>
+                android:layout_marginEnd="@dimen/text_margin"
+                android:text="Daftar Barang"
+                android:textAppearance="@style/heading1"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
-                android:id="@+id/recyclerView_peminjaman"
-                android:visibility="gone"/>
+                android:id="@+id/recyclerview_inventaris"/>
 
         </LinearLayout>
 

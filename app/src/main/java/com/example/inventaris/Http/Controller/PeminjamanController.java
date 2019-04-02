@@ -37,4 +37,8 @@ public class PeminjamanController {
         Call<Peminjaman> get = peminjamanInterface.getPeminjaman(peminjamanRequest);
         get.enqueue(then);
     }
+
+    public void get(Callback<Peminjaman> then){
+        get(0, 10, then);
+    }
 }

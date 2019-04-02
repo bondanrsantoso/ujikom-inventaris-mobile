@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/text_margin"
+    android:paddingBottom="@dimen/text_margin">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:srcCompat="@drawable/ic_pending"
+        app:civ_circle_background_color="@color/colorAccent"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="@dimen/text_margin"
+        android:id="@+id/peminjaman_imageview"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/text_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="20 Maret 2019 s.d. 15 April 2019"
+            android:textAppearance="@style/ListTitle"
+            android:id="@+id/peminjaman_title_textView"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:id="@+id/peminjaman_status_textView"/>
+
+    </LinearLayout>
+
+</LinearLayout>

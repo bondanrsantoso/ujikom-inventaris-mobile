@@ -22,6 +22,9 @@ public class DataItem{
 	@SerializedName("status")
 	private String status;
 
+	@SerializedName("kembali")
+	private boolean kembali;
+
 	public void setNo(int no){
 		this.no = no;
 	}
@@ -68,6 +71,14 @@ public class DataItem{
 
 	public String getStatus(){
 		return status;
+	}
+
+	public void setKembali(boolean kembali) {
+		this.kembali = kembali;
+	}
+
+	public boolean isKembali() {
+		return kembali;
 	}
 
 	@Override

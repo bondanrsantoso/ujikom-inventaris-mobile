@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/peminjaman_menu"
+        android:title="Peminjaman"
+        android:icon="@drawable/ic_peminjaman_list"/>
+
+    <item
+        android:id="@+id/barang_menu"
+        android:title="Barang"
+        android:icon="@drawable/ic_peminjaman_barang"/>
+    <item
+        android:id="@+id/profil_menu"
+        android:title="Profil"
+        android:icon="@drawable/ic_profil"/>
+
+</menu>

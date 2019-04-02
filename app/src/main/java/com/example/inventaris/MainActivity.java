@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements Callback<User> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EnvironmentVariables.setBaseURL(this, "http://34312410.ngrok.io/");
+        EnvironmentVariables.setBaseURL(this, "http://84fb5df2.ngrok.io/");
         setContentView(R.layout.activity_main);
 
 //        Initializing Auth Controller
@@ -53,6 +53,21 @@ public class MainActivity extends AppCompatActivity implements Callback<User> {
     @Override
     protected void onStart() {
         super.onStart();
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginProgressCircular.setVisibility(View.VISIBLE);
+                loginForm.setVisibility(View.GONE);
+
+                User user = new User();
+                user.setNip(nipTextField.getText().toString());
+                user.setPassword(passwordTextField.getText().toString());
+
+                mAuthController.authenticate(user);
+            }
+        });
+
         String userToken = EnvironmentVariables.getUserToken(this);
         if(userToken != EnvironmentVariables.NULL){
 
@@ -66,30 +81,24 @@ public class MainActivity extends AppCompatActivity implements Callback<User> {
         } else {
             loginForm.setVisibility(View.VISIBLE);
             loginProgressCircular.setVisibility(View.GONE);
-
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    User user = new User();
-                    user.setNip(nipTextField.getText().toString());
-                    user.setPassword(passwordTextField.getText().toString());
-
-                    mAuthController.authenticate(user);
-                }
-            });
         }
     }
 
     @Override
     public void onResponse(Call<User> call, Response<User> response) {
         if(response.isSuccessful()){
+            if(response.code() >= 300){
+                loginForm.setVisibility(View.VISIBLE);
+                loginProgressCircular.setVisibility(View.GONE);
+            }
             User user = response.body();
-
             EnvironmentVariables.setUserToken(this, user.getApiToken());
-            Intent i = new Intent(this, PeminjamanActivity.class);
+            Intent i = new Intent(this, RootActivity.class);
             startActivity(i);
             finish();
         } else {
+            loginForm.setVisibility(View.VISIBLE);
+            loginProgressCircular.setVisibility(View.GONE);
             Log.e("RequestFailed", response.errorBody().toString());
         }
     }
