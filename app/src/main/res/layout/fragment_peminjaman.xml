@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PeminjamanActivity">
+    tools:context=".PeminjamanFragment">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Atur segala keperluan peminjaman Anda di sini"
+                android:text="@string/peminjaman_tagline"
                 android:textSize="16sp"
                 android:textColor="#fff"
                 android:layout_margin="@dimen/subtitle_margin"
