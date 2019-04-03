@@ -8,13 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.inventaris.Adapter.EventListeners.OnButtonClickListener;
 import com.example.inventaris.Adapter.InventarisListAdapter;
 import com.example.inventaris.Http.Controller.InventarisController;
+import com.example.inventaris.Model.Inventaris.DataItem;
 import com.example.inventaris.Model.Inventaris.Inventaris;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +51,13 @@ public class BarangFragment extends Fragment implements Callback<Inventaris> {
     RecyclerView inventarisRecyclerView;
     RecyclerView.Adapter inventarisListViewAdapter;
     RecyclerView.LayoutManager inventarisListViewLayoutManager;
+    TextView selectedItemCountTextView;
+    Button lanjutButton;
+
+    Inventaris mInventaris = null;
+    List<String> selectedID;
+    int page = 0;
+    int selectedItem = 0;
 
     InventarisController inventarisController;
 
@@ -113,41 +128,68 @@ public class BarangFragment extends Fragment implements Callback<Inventaris> {
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().setTitle("Barang");
+//        getActivity().setTitle("Barang");
 
         toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        inventarisController = new InventarisController(getActivity(), this);
-        inventarisController.get(0, 100, new Callback<Inventaris>() {
+        selectedItemCountTextView = (TextView) getView().findViewById(R.id.textview_peminjamancount);
+        lanjutButton = (Button) getView().findViewById(R.id.button_lanjut);
+
+        lanjutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<Inventaris> call, Response<Inventaris> response) {
-                if(response.isSuccessful()){
-                    Inventaris inventaris = response.body();
-                    inventarisRecyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerview_inventaris);
-                    inventarisRecyclerView.setHasFixedSize(false);
-
-                    inventarisListViewLayoutManager = new LinearLayoutManager(BarangFragment.this.getActivity());
-                    inventarisRecyclerView.setLayoutManager(inventarisListViewLayoutManager);
-
-                    inventarisListViewAdapter = new InventarisListAdapter(response.body());
-                    inventarisRecyclerView.setAdapter(inventarisListViewAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Inventaris> call, Throwable t) {
-
+            public void onClick(View v) {
+                String selectedIDs = TextUtils.join(";", selectedID);
+                ((AppCompatActivity) getActivity()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, TakeawayFragment.newInstance(selectedIDs))
+                        .commit();
             }
         });
+
+        inventarisRecyclerView = (RecyclerView) getView().findViewById(R.id.recyclerview_inventaris);
+        inventarisRecyclerView.setHasFixedSize(false);
+
+        selectedID = new ArrayList<String>();
+
+        inventarisListViewLayoutManager = new LinearLayoutManager(BarangFragment.this.getActivity());
+        inventarisRecyclerView.setLayoutManager(inventarisListViewLayoutManager);
+
+        inventarisController = new InventarisController(getActivity(), this);
+        inventarisController.get(0, 100);
     }
 
     @Override
     public void onResponse(Call<Inventaris> call, Response<Inventaris> response) {
         if(response.isSuccessful()){
-            Inventaris inventaris = response.body();
-            inventarisListViewAdapter = new InventarisListAdapter(inventaris);
-            inventarisRecyclerView.setAdapter(inventarisListViewAdapter);
+            if(mInventaris == null){
+                mInventaris = response.body();
+                inventarisListViewAdapter = new InventarisListAdapter(mInventaris, new OnButtonClickListener() {
+                    @Override
+                    public void onButtonClick(View v, int position) {
+                        DataItem selectedItem = mInventaris.getData().get(position);
+                        selectedItem.setAkanDipinjam(!selectedItem.isAkanDipinjam());
+                        ((Button) v).setText(selectedItem.isAkanDipinjam()? R.string.batal_pinjam : R.string.pinjam);
+
+                        BarangFragment.this.selectedItem += selectedItem.isAkanDipinjam()? 1 : -1;
+                        BarangFragment.this.selectedItemCountTextView
+                                .setText(getString(R.string.jumlah_pinjam_placeholder)
+                                        .replace("0", String.valueOf(BarangFragment.this.selectedItem)));
+
+                        BarangFragment.this.lanjutButton.setEnabled(BarangFragment.this.selectedItem > 0);
+                        if(selectedItem.isAkanDipinjam()){
+                            selectedID.add(String.valueOf(selectedItem.getIdInventaris()));
+                        } else {
+                            selectedID.remove(String.valueOf(selectedItem.getIdInventaris()));
+                        }
+                    }
+                });
+                inventarisRecyclerView.setAdapter(inventarisListViewAdapter);
+            } else {
+                List<DataItem> list = mInventaris.getData();
+                list.addAll(response.body().getData());
+                mInventaris.setData(list);
+                ((InventarisListAdapter) inventarisListViewAdapter).appendDataSet(response.body());
+            }
         }
     }
 

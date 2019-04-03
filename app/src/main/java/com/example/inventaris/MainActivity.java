@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements Callback<User> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EnvironmentVariables.setBaseURL(this, "http://84fb5df2.ngrok.io/");
+        EnvironmentVariables.setBaseURL(this, "http://953a2d39.ngrok.io/");
         setContentView(R.layout.activity_main);
 
 //        Initializing Auth Controller

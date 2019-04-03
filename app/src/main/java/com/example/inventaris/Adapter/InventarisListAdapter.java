@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,14 +13,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.inventaris.Adapter.EventListeners.OnButtonClickListener;
 import com.example.inventaris.Model.Inventaris.DataItem;
 import com.example.inventaris.Model.Inventaris.Inventaris;
 import com.example.inventaris.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class InventarisListAdapter extends RecyclerView.Adapter<InventarisListAdapter.InventarisListViewHolder> {
 
     Inventaris mInventaris;
+    OnButtonClickListener onButtonClickListener;
 
     public static class InventarisListViewHolder extends RecyclerView.ViewHolder{
 
@@ -39,8 +44,16 @@ public class InventarisListAdapter extends RecyclerView.Adapter<InventarisListAd
         }
     }
 
-    public InventarisListAdapter(Inventaris dataset){
+    public InventarisListAdapter(Inventaris dataset, OnButtonClickListener onButtonClickListener){
         this.mInventaris = dataset;
+        this.onButtonClickListener = onButtonClickListener;
+    }
+
+    public void appendDataSet(Inventaris dataset){
+        List<DataItem> dataItems = this.mInventaris.getData();
+        dataItems.addAll(dataset.getData());
+        mInventaris.setData(dataItems);
+        this.notifyItemInserted(mInventaris.getData().size() - 1);
     }
 
     @NonNull
@@ -55,7 +68,7 @@ public class InventarisListAdapter extends RecyclerView.Adapter<InventarisListAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InventarisListViewHolder inventarisListViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final InventarisListViewHolder inventarisListViewHolder, int i) {
         DataItem inventarisData = mInventaris.getData().get(i);
         String inventarisDetail =
                 "Jenis: " + inventarisData.getNamaJenis() + "\n" +
@@ -65,6 +78,12 @@ public class InventarisListAdapter extends RecyclerView.Adapter<InventarisListAd
         inventarisListViewHolder.inventarisDetailTextView.setText(inventarisDetail);
 //        inventarisListViewHolder.inventarisImageView;
         Picasso.get().load(inventarisData.getUrlGambar()).into(inventarisListViewHolder.inventarisImageView);
+        inventarisListViewHolder.inventarisTakeawayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClickListener.onButtonClick(v, inventarisListViewHolder.getAdapterPosition());
+            }
+        });
     }
 
     @Override

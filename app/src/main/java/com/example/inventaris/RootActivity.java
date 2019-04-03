@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class RootActivity extends AppCompatActivity implements PeminjamanFragment.OnFragmentInteractionListener, BarangFragment.OnFragmentInteractionListener {
+public class RootActivity extends AppCompatActivity implements
+        PeminjamanFragment.OnFragmentInteractionListener, BarangFragment.OnFragmentInteractionListener,
+        TakeawayFragment.OnFragmentInteractionListener {
 
     private TextView mTextMessage;
 

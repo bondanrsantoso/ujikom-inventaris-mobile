@@ -11,6 +11,14 @@ public interface InventarisInterface {
     Call<Inventaris> getInventaris();
 
     @GET("api/mobile/inventaris/get")
+    Call<Inventaris> getInventaris(@Query("only") String ids);
+
+    @GET("api/mobile/inventaris/get")
+    Call<Inventaris> getInventaris(@Query("only") String ids,
+                                   @Query("start_date") String startDateStr,
+                                   @Query("end_date") String endDateStr);
+
+    @GET("api/mobile/inventaris/get")
     Call<Inventaris> getInventaris(@Query("offset") int offset, @Query("limit") int limit);
 
     @GET("api/mobile/inventaris/get")
