@@ -20,12 +20,15 @@ import com.example.inventaris.Model.Inventaris.Inventaris;
 import com.example.inventaris.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TakeawayListAdapter extends RecyclerView.Adapter<TakeawayListAdapter.TakeawayListViewHolder> {
 
     Inventaris mInventaris;
+    List<Integer> mTakeaways;
     OnInputChangeListener mOnInputChangeListener;
+    OnButtonClickListener mOnButtonClickListener;
 
 
     public static class TakeawayListViewHolder extends RecyclerView.ViewHolder{
@@ -45,13 +48,16 @@ public class TakeawayListAdapter extends RecyclerView.Adapter<TakeawayListAdapte
         }
     }
 
-    public TakeawayListAdapter(Inventaris dataset, OnInputChangeListener onInputChangeListener){
+    public TakeawayListAdapter(Inventaris dataset, List<Integer> takeaways, OnInputChangeListener onInputChangeListener, OnButtonClickListener onButtonClickListener){
         this.mInventaris = dataset;
-        mOnInputChangeListener = onInputChangeListener;
+        this.mTakeaways = takeaways;
+        this.mOnInputChangeListener = onInputChangeListener;
+        this.mOnButtonClickListener = onButtonClickListener;
     }
 
-    public void updateDataSet(Inventaris dataset){
+    public void updateDataSet(Inventaris dataset, List<Integer> takeaways){
         this.mInventaris = dataset;
+        this.mTakeaways = takeaways;
         this.notifyDataSetChanged();
     }
 
@@ -79,6 +85,7 @@ public class TakeawayListAdapter extends RecyclerView.Adapter<TakeawayListAdapte
 
         TakeawayListViewHolder.inventarisTitleTextView.setText(inventarisData.getNama());
         TakeawayListViewHolder.inventarisStokEditText.setText(String.valueOf(inventarisData.getStok()));
+        TakeawayListViewHolder.inventarisTakeawayEditText.setText(String.valueOf(mTakeaways.get(i)));
         TakeawayListViewHolder.inventarisTakeawayEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -92,7 +99,14 @@ public class TakeawayListAdapter extends RecyclerView.Adapter<TakeawayListAdapte
 
             @Override
             public void afterTextChanged(Editable s) {
-                mOnInputChangeListener.onChange(TakeawayListViewHolder.inventarisTakeawayEditText, TakeawayListViewHolder.getAdapterPosition());
+                mOnInputChangeListener.onChange(TakeawayListViewHolder.inventarisTakeawayEditText,
+                        TakeawayListViewHolder.getAdapterPosition());
+            }
+        });
+        TakeawayListViewHolder.inventarisTakeawayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnButtonClickListener.onButtonClick(v, TakeawayListViewHolder.getAdapterPosition());
             }
         });
         Picasso.get().load(inventarisData.getUrlGambar()).into(TakeawayListViewHolder.inventarisImageView);

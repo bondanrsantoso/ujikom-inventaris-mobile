@@ -128,7 +128,7 @@ public class BarangFragment extends Fragment implements Callback<Inventaris> {
     @Override
     public void onStart() {
         super.onStart();
-//        getActivity().setTitle("Barang");
+        getActivity().setTitle("Barang");
 
         toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
