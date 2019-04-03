@@ -115,7 +115,7 @@ public class PeminjamanFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        getActivity().setTitle("Peminjaman");
+        getActivity().setTitle("Peminjaman");
         toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         peminjamanLoading = (ProgressBar) getView().findViewById(R.id.peminjamanlist_loading);

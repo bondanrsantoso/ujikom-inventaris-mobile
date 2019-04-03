@@ -3,6 +3,7 @@ package com.example.inventaris.Http.Controller;
 import android.content.Context;
 
 import com.example.inventaris.Http.Interface.PeminjamanInterface;
+import com.example.inventaris.Model.Peminjaman.AddRequest;
 import com.example.inventaris.Model.Peminjaman.Peminjaman;
 import com.example.inventaris.Model.Peminjaman.Request;
 import com.example.inventaris.Model.User;
@@ -40,5 +41,18 @@ public class PeminjamanController {
 
     public void get(Callback<Peminjaman> then){
         get(0, 10, then);
+    }
+
+    public void add(AddRequest peminjamanAddRequest, Callback<Object> then){
+        AddRequest addRequest = peminjamanAddRequest;
+        addRequest.setApiToken(EnvironmentVariables.getUserToken(mContext));
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PeminjamanInterface peminjamanInterface = retrofit.create(PeminjamanInterface.class);
+
+        Call<Object> add = peminjamanInterface.addPeminjaman(addRequest);
+        add.enqueue(then);
     }
 }
