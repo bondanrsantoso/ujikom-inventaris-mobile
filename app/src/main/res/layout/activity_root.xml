@@ -23,9 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:itemIconTint="@drawable/bottomnav_state"
+        app:itemTextColor="@drawable/bottomnav_state"
         app:menu="@menu/bottomnavigation_menu" />
 
 </LinearLayout>

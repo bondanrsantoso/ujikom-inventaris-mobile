@@ -49,6 +49,11 @@ public class DataItem{
 	@SerializedName("kode_petugas")
 	private String kodePetugas;
 
+	@SerializedName("stok")
+	private int stok;
+
+	private boolean akanDipinjam = false;
+
 	public void setKodeInventaris(String kodeInventaris){
 		this.kodeInventaris = kodeInventaris;
 	}
@@ -167,6 +172,22 @@ public class DataItem{
 
 	public String getKodePetugas(){
 		return kodePetugas;
+	}
+
+	public void setStok(int stok) {
+		this.stok = stok;
+	}
+
+	public int getStok() {
+		return stok;
+	}
+
+	public boolean isAkanDipinjam() {
+		return akanDipinjam;
+	}
+
+	public void setAkanDipinjam(boolean akanDipinjam) {
+		this.akanDipinjam = akanDipinjam;
 	}
 
 	@Override

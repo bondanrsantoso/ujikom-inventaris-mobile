@@ -1,6 +1,7 @@
 package com.example.inventaris.Http.Controller;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.example.inventaris.Http.Interface.InventarisInterface;
 import com.example.inventaris.Model.Inventaris.Inventaris;
@@ -57,5 +58,11 @@ public class InventarisController {
     public void search(String query, Callback<Inventaris> then){
         Call<Inventaris> search = mInventarisInterface.searchInventaris(query);
         search.enqueue(then);
+    }
+
+    public void getSpecifics(String[] selectedIds, String startDateStr, String endDateStr){
+        String id = TextUtils.join(",", selectedIds);
+        Call<Inventaris> get = mInventarisInterface.getInventaris(id, startDateStr, endDateStr);
+        get.enqueue(mDefaultCallback);
     }
 }

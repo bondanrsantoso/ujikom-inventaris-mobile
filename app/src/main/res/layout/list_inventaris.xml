@@ -28,10 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/text_margin"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:layout_marginTop="@dimen/text_margin"
-                android:layout_marginBottom="0dp"
+                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/textview_inventarisname"
                 android:textAppearance="@style/heading1"
                 android:text="Lorem Ipsum"
@@ -49,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="@dimen/fab_margin"
+                android:background="@color/colorAccentLight"
                 android:gravity="end">
 
                 <!--<android.support.design.widget.TextInputLayout-->
@@ -85,7 +82,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pinjam"
-                    android:id="@+id/button_inventaristakeaway"/>
+                    android:id="@+id/button_inventaristakeaway"
+                    android:textColor="@color/colorPrimary"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
             </LinearLayout>
 

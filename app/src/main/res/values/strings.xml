@@ -105,4 +105,11 @@
     <string name="peminjaman_tagline">Atur segala keperluan peminjaman Anda di sini</string>
     <string name="barang_tagline">Barang-barang yang tersedia untuk dipinjam</string>
     <string name="pinjam">Pinjam</string>
+    <string name="batal_pinjam">Batal Pinjam</string>
+    <string name="jumlah_pinjam_placeholder">0 Barang akan dipinjam</string>
+    <string name="lanjut">Lanjut</string>
+    <string name="takeaway_tagline">Barang-barang yang akan dipinjam</string>
+    <string name="tanggal_pinjam">Tanggal Pinjam</string>
+    <string name="tanggal_kembali">Tanggal Kembali</string>
+    <string name="gambar_barang">Gambar barang</string>
 </resources>

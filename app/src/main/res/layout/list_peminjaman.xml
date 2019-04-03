@@ -11,7 +11,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:srcCompat="@drawable/ic_pending"
+        android:src="@drawable/ic_pending"
         app:civ_circle_background_color="@color/colorAccent"
         android:scaleType="centerCrop"
         android:layout_marginStart="@dimen/text_margin"
