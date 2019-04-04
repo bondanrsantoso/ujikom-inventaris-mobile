@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.inventaris.Adapter.EventListeners.OnItemClickListener;
 import com.example.inventaris.Model.Peminjaman.DataItem;
 import com.example.inventaris.Model.Peminjaman.Peminjaman;
 import com.example.inventaris.R;
@@ -21,6 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PeminjamanListAdapter extends RecyclerView.Adapter<PeminjamanListAdapter.PeminjamanListViewHolder> {
     private Peminjaman mPeminjaman;
+    private OnItemClickListener mOnItemClickListener;
 
     final String[] months = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
 
@@ -40,6 +43,10 @@ public class PeminjamanListAdapter extends RecyclerView.Adapter<PeminjamanListAd
     public PeminjamanListAdapter(Peminjaman dataset){
         mPeminjaman = dataset;
     }
+    public PeminjamanListAdapter(Peminjaman dataset, OnItemClickListener onItemClickListener){
+        mPeminjaman = dataset;
+        mOnItemClickListener = onItemClickListener;
+    }
 
     @Override
     public PeminjamanListAdapter.PeminjamanListViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -50,7 +57,7 @@ public class PeminjamanListAdapter extends RecyclerView.Adapter<PeminjamanListAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PeminjamanListViewHolder peminjamanListViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final PeminjamanListViewHolder peminjamanListViewHolder, int i) {
         DataItem peminjamanData = mPeminjaman.getData().get(i);
         int takeawayTimestamp = mPeminjaman.getData().get(i).getTanggalPinjam();
         int returnTimestamp = mPeminjaman.getData().get(i).getTanggalKembali();
@@ -82,6 +89,12 @@ public class PeminjamanListAdapter extends RecyclerView.Adapter<PeminjamanListAd
                         endCal.get(Calendar.DATE) + " " + months[endCal.get(Calendar.MONTH)] + " " + endCal.get(Calendar.YEAR) );
 
         peminjamanListViewHolder.peminjamanStatusTextView.setText(mPeminjaman.getData().get(i).getStatus());
+        peminjamanListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.onClick(v, peminjamanListViewHolder.getAdapterPosition());
+            }
+        });
     }
 
     @Override

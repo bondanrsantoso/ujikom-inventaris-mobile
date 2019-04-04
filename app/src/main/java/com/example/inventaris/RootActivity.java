@@ -9,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.inventaris.Http.Controller.DetailPinjamFragment;
+
 public class RootActivity extends AppCompatActivity implements
         PeminjamanFragment.OnFragmentInteractionListener, BarangFragment.OnFragmentInteractionListener,
-        TakeawayFragment.OnFragmentInteractionListener {
+        TakeawayFragment.OnFragmentInteractionListener, DetailPinjamFragment.OnFragmentInteractionListener {
 
     private TextView mTextMessage;
 
@@ -22,6 +24,12 @@ public class RootActivity extends AppCompatActivity implements
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

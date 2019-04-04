@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.inventaris.Adapter.EventListeners.OnItemClickListener;
 import com.example.inventaris.Adapter.PeminjamanListAdapter;
+import com.example.inventaris.Http.Controller.DetailPinjamFragment;
 import com.example.inventaris.Http.Controller.PeminjamanController;
 import com.example.inventaris.Model.Peminjaman.Peminjaman;
 
@@ -50,6 +52,7 @@ public class PeminjamanFragment extends Fragment {
     ProgressBar peminjamanLoading;
 
     PeminjamanController peminjamanController;
+    private Peminjaman mPeminjaman;
 
     public PeminjamanFragment() {
         // Required empty public constructor
@@ -132,7 +135,16 @@ public class PeminjamanFragment extends Fragment {
             @Override
             public void onResponse(Call<Peminjaman> call, Response<Peminjaman> response) {
 //                Log.d("RETORFIT", "onResponse: " + response.body().toString());
-                peminjamanListAdapter = new PeminjamanListAdapter(response.body());
+                mPeminjaman = response.body();
+                peminjamanListAdapter = new PeminjamanListAdapter(mPeminjaman, new OnItemClickListener() {
+                    @Override
+                    public void onClick(View v, int position) {
+                        ((AppCompatActivity) getActivity()).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, DetailPinjamFragment
+                                        .newInstance(String.valueOf(mPeminjaman.getData().get(position)
+                                                .getIdPeminjaman()))).commit();
+                    }
+                });
                 peminjamanRecyclerView.setAdapter(peminjamanListAdapter);
                 peminjamanRecyclerView.setVisibility(View.VISIBLE);
                 peminjamanLoading.setVisibility(View.GONE);

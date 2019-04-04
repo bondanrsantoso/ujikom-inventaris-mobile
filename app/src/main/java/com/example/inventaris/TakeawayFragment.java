@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class TakeawayFragment extends Fragment implements Callback<Inventaris>{
     RecyclerView.Adapter takeAwayListViewAdapter = null;
     RecyclerView.LayoutManager linearLayoutManager;
     Button pinjamButton;
+    Toolbar toolbar;
 
     Calendar startDateCalendar, endDateCalendar;
     SimpleDateFormat dateFormatter;
@@ -143,6 +145,9 @@ public class TakeawayFragment extends Fragment implements Callback<Inventaris>{
     public void onStart() {
         super.onStart();
         getActivity().setTitle("Pinjam");
+        toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         final Date today = new Date(System.currentTimeMillis());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(today);

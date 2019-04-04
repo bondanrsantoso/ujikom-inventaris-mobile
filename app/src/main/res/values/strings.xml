@@ -108,8 +108,12 @@
     <string name="batal_pinjam">Batal Pinjam</string>
     <string name="jumlah_pinjam_placeholder">0 Barang akan dipinjam</string>
     <string name="lanjut">Lanjut</string>
-    <string name="takeaway_tagline">Barang-barang yang akan dipinjam</string>
     <string name="tanggal_pinjam">Tanggal Pinjam</string>
+    <string name="takeaway_tagline">Barang-barang yang akan dipinjam</string>
     <string name="tanggal_kembali">Tanggal Kembali</string>
     <string name="gambar_barang">Gambar barang</string>
+    <string name="daftar_barang_pinjaman">Daftar barang pinjaman</string>
+    <string name="pending">Pending</string>
+    <string name="status">Status</string>
+    <string name="nama_pegawai">Nama pegawai</string>
 </resources>

@@ -48,7 +48,9 @@ public class TakeawayListAdapter extends RecyclerView.Adapter<TakeawayListAdapte
         }
     }
 
-    public TakeawayListAdapter(Inventaris dataset, List<Integer> takeaways, OnInputChangeListener onInputChangeListener, OnButtonClickListener onButtonClickListener){
+    public TakeawayListAdapter(Inventaris dataset, List<Integer> takeaways,
+                               OnInputChangeListener onInputChangeListener,
+                               OnButtonClickListener onButtonClickListener){
         this.mInventaris = dataset;
         this.mTakeaways = takeaways;
         this.mOnInputChangeListener = onInputChangeListener;
